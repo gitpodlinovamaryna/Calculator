@@ -1,4 +1,78 @@
 #include "mainwindow.h"
+#include <QLayout>
+#include <QPushButton>
+#include <QDebug>
+#include <QLineEdit>
+#include <QMenu>
+#include <QMenuBar>
+
+
+
+void AddButton(Widget * w, QGridLayout * layout, QString text, int i, int j)
+{
+    QPushButton * Button = new QPushButton(text);
+    QObject::connect(Button, SIGNAL(clicked(bool)),w, SLOT(buttonPressed()) );
+    layout->addWidget(Button, i, j);
+}
+
+Widget::Widget(QWidget *parent)
+    : QWidget(parent)
+{
+    m_display = "0";
+    QGridLayout * layout = new QGridLayout;
+    QVBoxLayout * topLayout = new QVBoxLayout;
+    QLineEdit * display = new QLineEdit(m_display);
+
+    display->setEnabled(false);
+    display->setAlignment(Qt::AlignRight);
+    QObject::connect(this, SIGNAL(UpdateDisplay(QString)),display, SLOT(setText(QString)));
+    layout->addWidget(display, 0,1,1,3);
+
+    AddButton(this, layout, "1",1,1);
+    AddButton(this, layout, "2",1,2);
+    AddButton(this, layout, "3",1,3);
+    AddButton(this, layout, "4",2,1);
+    AddButton(this, layout, "5",2,2);
+    AddButton(this, layout, "6",2,3);
+    AddButton(this, layout, "7",3,1);
+    AddButton(this, layout, "8",3,2);
+    AddButton(this, layout, "9",3,3);
+    AddButton(this, layout, "0",4,1);
+
+    QMenu * fileMenu = new QMenu("Файл");
+    fileMenu->addAction("Выход", this, SLOT(close()));
+    QMenu * helpMenu = new QMenu("Помощь");
+    helpMenu->addAction("Сброс", this,SLOT(reset()));
+    QMenuBar * menu = new QMenuBar;
+    menu->addMenu(fileMenu);
+    menu->addMenu(helpMenu);
+    topLayout->addWidget(menu);
+    topLayout->addLayout(layout);
+
+    setLayout(topLayout);
+
+}
+
+Widget::~Widget()
+{
+}
+
+void Widget::buttonPressed()
+{
+   m_display += ((QPushButton *)sender())->text();
+   emit UpdateDisplay(m_display); //посылает сигнал
+   qDebug() << m_display << endl;
+}
+
+
+void Widget::reset()
+{
+   m_display = "0";
+   emit UpdateDisplay(m_display); //посылает сигнал
+   qDebug() << m_display << endl;
+}
+
+/*#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 
@@ -156,5 +230,5 @@ void MainWindow::math_operations()
 
     ui->result_show->setText("");
     button->setChecked(true);
-}
+}*/
 
