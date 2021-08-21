@@ -1,5 +1,5 @@
-#ifndef WIDGET_H
-#define WIDGET_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QWidget>
 
@@ -22,6 +22,8 @@ public slots:
     void reset();
 };
 #endif // WIDGET_H
+
+
 
 
 

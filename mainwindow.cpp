@@ -5,52 +5,62 @@
 #include <QLineEdit>
 #include <QMenu>
 #include <QMenuBar>
+#include <QTextEdit>
 
 
 
 void AddButton(Widget * w, QGridLayout * layout, QString text, int i, int j)
 {
     QPushButton * Button = new QPushButton(text);
+    Button->resize(50,50);
+    Button->setFixedSize(QSize(50,50));
     QObject::connect(Button, SIGNAL(clicked(bool)),w, SLOT(buttonPressed()) );
     layout->addWidget(Button, i, j);
 }
 
+void AddLineEdit(Widget * w, QGridLayout * layout, QString text)
+{
+    QLineEdit * display = new QLineEdit(text);
+    display->setFixedSize(QSize(200,50));
+    display->setEnabled(false);
+    display->setAlignment(Qt::AlignRight);
+    QObject::connect(w, SIGNAL(UpdateDisplay(QString)),display, SLOT(setText(QString)));
+    layout->addWidget(display, 0,1,1,4);
+}
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
 {
+
     m_display = "0";
     QGridLayout * layout = new QGridLayout;
-    QVBoxLayout * topLayout = new QVBoxLayout;
-    QLineEdit * display = new QLineEdit(m_display);
 
-    display->setEnabled(false);
-    display->setAlignment(Qt::AlignRight);
-    QObject::connect(this, SIGNAL(UpdateDisplay(QString)),display, SLOT(setText(QString)));
-    layout->addWidget(display, 0,1,1,3);
+    layout->setSpacing(0);
+    layout->columnStretch(0);
 
-    AddButton(this, layout, "1",1,1);
-    AddButton(this, layout, "2",1,2);
-    AddButton(this, layout, "3",1,3);
-    AddButton(this, layout, "4",2,1);
-    AddButton(this, layout, "5",2,2);
-    AddButton(this, layout, "6",2,3);
-    AddButton(this, layout, "7",3,1);
-    AddButton(this, layout, "8",3,2);
-    AddButton(this, layout, "9",3,3);
-    AddButton(this, layout, "0",4,1);
+    AddLineEdit(this, layout, m_display);
 
-    QMenu * fileMenu = new QMenu("Файл");
-    fileMenu->addAction("Выход", this, SLOT(close()));
-    QMenu * helpMenu = new QMenu("Помощь");
-    helpMenu->addAction("Сброс", this,SLOT(reset()));
-    QMenuBar * menu = new QMenuBar;
-    menu->addMenu(fileMenu);
-    menu->addMenu(helpMenu);
-    topLayout->addWidget(menu);
-    topLayout->addLayout(layout);
+    AddButton(this, layout, "%",1,1);
+    AddButton(this, layout, "СE",1,2);
+    AddButton(this, layout, "<-X",1,3);
+    AddButton(this, layout, "/",1,4);
+    AddButton(this, layout, "7",2,1);
+    AddButton(this, layout, "8",2,2);
+    AddButton(this, layout, "9",2,3);
+    AddButton(this, layout, "*",2,4);
+    AddButton(this, layout, "4",3,1);
+    AddButton(this, layout, "5",3,2);
+    AddButton(this, layout, "6",3,3);
+    AddButton(this, layout, "-",3,4);
+    AddButton(this, layout, "3",4,1);
+    AddButton(this, layout, "2",4,2);
+    AddButton(this, layout, "1",4,3);
+    AddButton(this, layout, "+",4,4);
+    AddButton(this, layout, "+/-",5,1);
+    AddButton(this, layout, "0",5,2);
+    AddButton(this, layout, ".",5,3);
+    AddButton(this, layout, "=",5,4);
 
-    setLayout(topLayout);
-
+    setLayout(layout);
 }
 
 Widget::~Widget()
