@@ -31,26 +31,30 @@ Calculator::Calculator(QWidget *parent)
     topLayout->setVerticalSpacing(0);
     topLayout->addWidget(m_display, 0, 0, 1, 5);
 
-    Button *plusButton = createButton(tr("+"),btn_orange, SLOT(plusClicked()));
-    Button *minusButton = createButton(tr("-"),btn_orange, SLOT(minusClicked()));
-    Button *divisionButton = createButton(tr("/"),btn_orange, SLOT(divisionClicked()));
-    Button *multiplyButton = createButton(tr("*"),btn_orange, SLOT(multiplyClicked()));
-    Button *equalButton = createButton(tr("="),btn_orange, SLOT(equalClicked()));
-    Button *pointButton = createButton(tr("."),btn_white, SLOT(pointClicked()));
-    Button *backspaceButton = createButton(tr("<-"),btn_gray , SLOT(backspaceClicked()));
-    Button *cleanButton = createButton(tr("CE"),btn_red, SLOT(clean()));
-    Button *percentButton = createButton(tr("%"),btn_gray, SLOT(percentClicked()));
+    Button *plusButton = createButton("+",btn_orange, SLOT(plusClicked()));
+    Button *minusButton = createButton("-",btn_orange, SLOT(minusClicked()));
+    Button *divisionButton = createButton("/",btn_orange, SLOT(divisionClicked()));
+    Button *multiplyButton = createButton("*",btn_orange, SLOT(multiplyClicked()));
+    Button *equalButton = createButton("=",btn_orange, SLOT(equalClicked()));
+    Button *pointButton = createButton(".",btn_white, SLOT(pointClicked()));
+    Button *backspaceButton = createButton("<-",btn_gray , SLOT(backspaceClicked()));
+    Button *cleanButton = createButton("CE",btn_red, SLOT(clean()));
+    Button *percentButton = createButton("%",btn_gray, SLOT(percentClicked()));
+    Button *changeSignButton = createButton("+/-",btn_white, SLOT(changeSignClicked()));
+    Button *digitButton_0 = createButton("0",btn_white, SLOT(Clicked()));
 
 
-    topLayout->addWidget(plusButton,4,4);
-    topLayout->addWidget(minusButton,3,4);
-    topLayout->addWidget(divisionButton,1,4);
-    topLayout->addWidget(multiplyButton,2,4);
-    topLayout->addWidget(equalButton,5,4);
-    topLayout->addWidget(pointButton,5,3);
-    topLayout->addWidget(backspaceButton, 1,3);
-    topLayout->addWidget(cleanButton, 1,1);
-    topLayout->addWidget(percentButton, 1,2);
+    topLayout->addWidget(plusButton, 4, 4);
+    topLayout->addWidget(minusButton, 3, 4);
+    topLayout->addWidget(divisionButton, 1, 4);
+    topLayout->addWidget(multiplyButton, 2, 4);
+    topLayout->addWidget(equalButton, 5, 4);
+    topLayout->addWidget(pointButton, 5, 3);
+    topLayout->addWidget(backspaceButton, 1, 3);
+    topLayout->addWidget(cleanButton, 1, 1);
+    topLayout->addWidget(percentButton, 1, 2);
+    topLayout->addWidget(changeSignButton, 5, 1);
+    topLayout->addWidget(digitButton_0, 5, 2);
     setLayout(topLayout);
 }
 
@@ -93,6 +97,11 @@ void Calculator::pointClicked()
 }
 
 void Calculator::percentClicked()
+{
+
+}
+
+void Calculator::changeSignClicked()
 {
 
 }

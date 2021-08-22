@@ -27,6 +27,7 @@ private slots:
       void equalClicked();
       void clean();
       void percentClicked();
+      void changeSignClicked();
 
 private:
       Button *createButton(const QString &text, QString color, const char *func_answer);
