@@ -6,8 +6,8 @@ Button::Button(const QString &text, QString color, QWidget *parent)
     setText(text);
     QFont btn_font("SansSerif", 14, QFont::Bold);
     setFont(btn_font);
-    setStyleSheet(color);
-    setMinimumHeight(60);
-    setMinimumWidth(60);
+    setMinimumHeight(50);
+    setMinimumWidth(50);
+    setStyleSheet("QPushButton{background:#FFFFFF;}");
 }
-//this->setStyleSheet("MainWindow{background-color:black}");
+

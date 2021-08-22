@@ -17,6 +17,9 @@
  public:
      Calculator(QWidget *parent = 0);
 
+private slots:
+      void pointClicked();
+
 private:
       Button *createButton(const QString &text, QString color, const char *func_answer);
  };

@@ -10,4 +10,4 @@ public:
 };
 
 #endif // BUTTON_H
-//QString("color: white;")
+
