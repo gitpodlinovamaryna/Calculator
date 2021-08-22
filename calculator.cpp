@@ -41,7 +41,16 @@ Calculator::Calculator(QWidget *parent)
     Button *cleanButton = createButton("CE",btn_red, SLOT(clean()));
     Button *percentButton = createButton("%",btn_gray, SLOT(percentClicked()));
     Button *changeSignButton = createButton("+/-",btn_white, SLOT(changeSignClicked()));
-    Button *digitButton_0 = createButton("0",btn_white, SLOT(Clicked()));
+    Button *digitButton_0 = createButton("0",btn_white, SLOT(digitClicked()));
+    Button *digitButton_1 = createButton("1",btn_white, SLOT(digitClicked()));
+    Button *digitButton_2 = createButton("2",btn_white, SLOT(digitClicked()));
+    Button *digitButton_3 = createButton("3",btn_white, SLOT(digitClicked()));
+    Button *digitButton_4 = createButton("4",btn_white, SLOT(digitClicked()));
+    Button *digitButton_5 = createButton("5",btn_white, SLOT(digitClicked()));
+    Button *digitButton_6 = createButton("6",btn_white, SLOT(digitClicked()));
+    Button *digitButton_7 = createButton("7",btn_white, SLOT(digitClicked()));
+    Button *digitButton_8 = createButton("8",btn_white, SLOT(digitClicked()));
+    Button *digitButton_9 = createButton("9",btn_white, SLOT(digitClicked()));
 
 
     topLayout->addWidget(plusButton, 4, 4);
@@ -55,6 +64,16 @@ Calculator::Calculator(QWidget *parent)
     topLayout->addWidget(percentButton, 1, 2);
     topLayout->addWidget(changeSignButton, 5, 1);
     topLayout->addWidget(digitButton_0, 5, 2);
+    topLayout->addWidget(digitButton_1, 4, 1);
+    topLayout->addWidget(digitButton_2, 4, 2);
+    topLayout->addWidget(digitButton_3, 4, 3);
+    topLayout->addWidget(digitButton_4, 3, 1);
+    topLayout->addWidget(digitButton_5, 3, 2);
+    topLayout->addWidget(digitButton_6, 3, 3);
+    topLayout->addWidget(digitButton_7, 2, 1);
+    topLayout->addWidget(digitButton_8, 2, 2);
+    topLayout->addWidget(digitButton_9, 2, 3);
+
     setLayout(topLayout);
 }
 
@@ -64,6 +83,11 @@ Button *Calculator::createButton(const QString &text, QString color, const char 
     Button *button = new Button(text, color);
     connect(button, SIGNAL(clicked()), this, SLOT(func_answer));
     return button;
+}
+
+void Calculator::digitClicked()
+{
+
 }
 
 void Calculator::plusClicked()
