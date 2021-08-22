@@ -25,6 +25,8 @@ private slots:
       void divisionClicked();
       void multiplyClicked();
       void equalClicked();
+      void clean();
+      void percentClicked();
 
 private:
       Button *createButton(const QString &text, QString color, const char *func_answer);

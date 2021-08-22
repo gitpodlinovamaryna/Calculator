@@ -14,7 +14,7 @@ Calculator::Calculator(QWidget *parent)
     m_display->setReadOnly(true);
     m_display->setAlignment(Qt::AlignRight);
     m_display->setMaxLength(15);
-    m_display->setFixedHeight(50);
+    m_display->setFixedHeight(60);
     m_display->setFont(displayFont);
 
     QString btn_orange = "QPushButton{background:#FF6600;}";
@@ -22,12 +22,12 @@ Calculator::Calculator(QWidget *parent)
     QString btn_red = "QPushButton{background:#CC0000;}";
     QString btn_gray = "QPushButton{background:#B1CECE;}";
 
-    setStyleSheet("Calculator{background-color:#629D9D}");
-    setFixedSize(260,350);
+    setStyleSheet("Calculator{background-color:#02020D}");
+    setFixedSize(260,300);
     setWindowTitle(tr("Calculator"));
 
     QGridLayout *topLayout = new QGridLayout;
-    topLayout->setSpacing(0);
+    topLayout->setSpacing(2);
     topLayout->setVerticalSpacing(0);
     topLayout->addWidget(m_display, 0, 0, 1, 5);
 
@@ -38,6 +38,9 @@ Calculator::Calculator(QWidget *parent)
     Button *equalButton = createButton(tr("="),btn_orange, SLOT(equalClicked()));
     Button *pointButton = createButton(tr("."),btn_white, SLOT(pointClicked()));
     Button *backspaceButton = createButton(tr("<-"),btn_gray , SLOT(backspaceClicked()));
+    Button *cleanButton = createButton(tr("CE"),btn_red, SLOT(clean()));
+    Button *percentButton = createButton(tr("%"),btn_gray, SLOT(percentClicked()));
+
 
     topLayout->addWidget(plusButton,4,4);
     topLayout->addWidget(minusButton,3,4);
@@ -46,6 +49,8 @@ Calculator::Calculator(QWidget *parent)
     topLayout->addWidget(equalButton,5,4);
     topLayout->addWidget(pointButton,5,3);
     topLayout->addWidget(backspaceButton, 1,3);
+    topLayout->addWidget(cleanButton, 1,1);
+    topLayout->addWidget(percentButton, 1,2);
     setLayout(topLayout);
 }
 
@@ -87,7 +92,16 @@ void Calculator::pointClicked()
 
 }
 
+void Calculator::percentClicked()
+{
+
+}
 void Calculator::backspaceClicked()
+{
+
+}
+
+void Calculator::clean()
 {
 
 }
