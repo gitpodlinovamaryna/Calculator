@@ -19,6 +19,12 @@
 
 private slots:
       void pointClicked();
+      void backspaceClicked();
+      void plusClicked();
+      void minusClicked();
+      void divisionClicked();
+      void multiplyClicked();
+      void equalClicked();
 
 private:
       Button *createButton(const QString &text, QString color, const char *func_answer);

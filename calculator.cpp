@@ -9,21 +9,43 @@ Calculator::Calculator(QWidget *parent)
     : QDialog(parent)
 {
 
+    QFont displayFont("Times", 16, QFont::Bold);
     m_display = new QLineEdit("0");
     m_display->setReadOnly(true);
     m_display->setAlignment(Qt::AlignRight);
     m_display->setMaxLength(15);
     m_display->setFixedHeight(50);
-    setStyleSheet("Calculator{background-color:black}");
+    m_display->setFont(displayFont);
+
+    QString btn_orange = "QPushButton{background:#FF6600;}";
+    QString btn_white = "QPushButton{background:#FFFFFF;}";
+    QString btn_red = "QPushButton{background:#CC0000;}";
+    QString btn_gray = "QPushButton{background:#B1CECE;}";
+
+    setStyleSheet("Calculator{background-color:#629D9D}");
     setFixedSize(260,350);
     setWindowTitle(tr("Calculator"));
 
     QGridLayout *topLayout = new QGridLayout;
+    topLayout->setSpacing(0);
+    topLayout->setVerticalSpacing(0);
+    topLayout->addWidget(m_display, 0, 0, 1, 5);
 
-    topLayout->addWidget(m_display, 0, 0, 2, 4);
-    Button *pointButton = createButton(tr("."),"white", SLOT(pointClicked()));
-    topLayout->addWidget(pointButton,2,2);
+    Button *plusButton = createButton(tr("+"),btn_orange, SLOT(plusClicked()));
+    Button *minusButton = createButton(tr("-"),btn_orange, SLOT(minusClicked()));
+    Button *divisionButton = createButton(tr("/"),btn_orange, SLOT(divisionClicked()));
+    Button *multiplyButton = createButton(tr("*"),btn_orange, SLOT(multiplyClicked()));
+    Button *equalButton = createButton(tr("="),btn_orange, SLOT(equalClicked()));
+    Button *pointButton = createButton(tr("."),btn_white, SLOT(pointClicked()));
+    Button *backspaceButton = createButton(tr("<-"),btn_gray , SLOT(backspaceClicked()));
 
+    topLayout->addWidget(plusButton,4,4);
+    topLayout->addWidget(minusButton,3,4);
+    topLayout->addWidget(divisionButton,1,4);
+    topLayout->addWidget(multiplyButton,2,4);
+    topLayout->addWidget(equalButton,5,4);
+    topLayout->addWidget(pointButton,5,3);
+    topLayout->addWidget(backspaceButton, 1,3);
     setLayout(topLayout);
 }
 
@@ -35,7 +57,37 @@ Button *Calculator::createButton(const QString &text, QString color, const char 
     return button;
 }
 
+void Calculator::plusClicked()
+{
+
+}
+
+void Calculator::minusClicked()
+{
+
+}
+
+void Calculator::divisionClicked()
+{
+
+}
+
+void Calculator::multiplyClicked()
+{
+
+}
+
+void Calculator::equalClicked()
+{
+
+}
+
 void Calculator::pointClicked()
+{
+
+}
+
+void Calculator::backspaceClicked()
 {
 
 }
