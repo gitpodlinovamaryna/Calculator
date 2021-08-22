@@ -8,13 +8,20 @@ Calculator::Calculator(QWidget *parent)
     : QDialog(parent)
 {
 
-    display = new QLineEdit("0");
-    display->setReadOnly(true);
-    display->setAlignment(Qt::AlignRight);
-    display->setMaxLength(15);
-
+    m_display = new QLineEdit("0");
+    m_display->setReadOnly(true);
+    m_display->setAlignment(Qt::AlignRight);
+    m_display->setMaxLength(15);
+    setStyleSheet("Calculator{background-color:black}");
+    setFixedSize(260,350);
     setWindowTitle(tr("Calculator"));
 
 }
 
 
+Button *Calculator::createButton(const QString &text, QString color, const char *func_answer)
+ {
+     Button *button = new Button(text, color);
+     connect(button, SIGNAL(clicked()), this,func_answer);
+     return button;
+ }

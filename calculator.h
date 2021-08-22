@@ -12,11 +12,13 @@
      Q_OBJECT
 
  private:
-      QLineEdit *display;
+      QLineEdit *m_display;
 
  public:
      Calculator(QWidget *parent = 0);
 
+private:
+      Button *createButton(const QString &text, QString color, const char *func_answer);
  };
 
  #endif

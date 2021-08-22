@@ -10,4 +10,4 @@ Button::Button(const QString &text, QString color, QWidget *parent)
     setMinimumHeight(60);
     setMinimumWidth(60);
 }
-//this->setStyleSheet("MainWindow{background-color:red}");
+//this->setStyleSheet("MainWindow{background-color:black}");
