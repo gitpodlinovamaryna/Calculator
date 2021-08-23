@@ -133,22 +133,22 @@ void Calculator::digitClicked()
 
 void Calculator::plusClicked()
 {
-
+    double second_operand = m_display->text().toDouble();
 }
 
 void Calculator::minusClicked()
 {
-
+     double second_operand = m_display->text().toDouble();
 }
 
 void Calculator::divisionClicked()
 {
-
+     double second_operand = m_display->text().toDouble();
 }
 
 void Calculator::multiplyClicked()
 {
-
+     double second_operand = m_display->text().toDouble();
 }
 
 void Calculator::equalClicked()
@@ -163,7 +163,12 @@ void Calculator::pointClicked()
 
 void Calculator::percentClicked()
 {
-
+    if (m_displayText == "0")
+        return;
+    double result = (m_displayText.toDouble()) / 100;
+    m_displayText = QString::number(result);
+    setText();
+    emit UpdateDisplay();
 }
 
 void Calculator::changeSignClicked()
