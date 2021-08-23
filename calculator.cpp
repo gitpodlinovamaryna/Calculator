@@ -24,7 +24,9 @@ Calculator::Calculator(QWidget *parent)
     m_display->setReadOnly(true);
     m_display->setAlignment(Qt::AlignRight);
     m_display->setFixedHeight(60);
+    m_display->setMaxLength(15);
     m_display->setFont(displayFont);
+    m_check_operand = true;
 
     Button *plusButton = createButton("+",btn_orange);
     Button *minusButton = createButton("-",btn_orange);
@@ -116,8 +118,13 @@ void Calculator::setText()
 void Calculator::digitClicked()
 {
     QString btn_value = ((QPushButton *)sender())->text();
-    if (m_display->text() == "0" && btn_value == "0.0")
+    if (m_displayText == "0" && btn_value == "0.0")
         return;
+    if (m_check_operand) {
+             m_display->clear();
+             m_check_operand = false;
+         }
+    m_displayText += btn_value;
     qDebug() << btn_value;
     setText();
     emit UpdateDisplay(); //посылает сигнал

@@ -16,6 +16,8 @@
  private:
       QLineEdit *m_display;
       QString m_displayText;
+      bool m_check_operand;
+
 
  public:
      Calculator(QWidget *parent = 0);
