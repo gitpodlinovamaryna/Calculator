@@ -5,7 +5,9 @@
 #include <QLineEdit>
 #include "button.h"
 #include <QIcon>
+#include <qapplication.h>
 
+ class Button;
 
  class Calculator : public QDialog
  {
@@ -13,9 +15,15 @@
 
  private:
       QLineEdit *m_display;
+      QString m_displayText;
 
  public:
      Calculator(QWidget *parent = 0);
+
+
+ signals:
+     void UpdateDisplay();
+
 
 private slots:
       void pointClicked();
@@ -29,9 +37,12 @@ private slots:
       void percentClicked();
       void changeSignClicked();
       void digitClicked();
+      //void setText(QString);
+      void setText();
 
 private:
-      Button *createButton(const QString &text, QString color, const char *func_answer);
+      Button *createButton(const QString &text, QString color);
+
  };
 
  #endif
