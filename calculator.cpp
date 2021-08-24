@@ -123,17 +123,16 @@ void Calculator::digitClicked()
         m_display->setText("0");
         m_checkOperand = false;
     }
+
     if(button->text().toDouble() == 0.0 && m_display->text() != "0")
     {
         m_display->setText(m_display->text() + button->text());
         return;
     }
-  //  if(!m_checkOperand)
-    //{
+
     double btn_value = (m_display->text() + button->text()).toDouble();
     qDebug() << btn_value;
     m_display->setText((QString::number(btn_value, 'g', 15)));
-    //}
  }
 
 void Calculator::plusClicked()
@@ -347,11 +346,19 @@ void Calculator::percentClicked()
 
 void Calculator::changeSignClicked()
 {
+
     QString displayText = m_display->text();
     double result = displayText.toDouble();
 
-    result *= (-1);
-    m_display->setText((QString::number(result, 'g', 15)));
+    if(result > 0.0)
+    {
+        displayText.prepend("-");
+    }
+    else if(result < 0.0)
+    {
+        displayText.remove(0, 1);
+    }
+    m_display->setText(displayText);
 }
 
 void Calculator::backspaceClicked()

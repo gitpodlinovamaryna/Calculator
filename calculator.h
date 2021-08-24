@@ -43,8 +43,6 @@ private slots:
       void percentClicked();
       void changeSignClicked();
       void digitClicked();
-      //void setText(QString);
-     // void setText();
 
 private:
       Button *createButton(const QString &text, QString color);
