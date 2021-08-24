@@ -118,7 +118,8 @@ Button *Calculator::createButton(const QString &text, QString color)
 void Calculator::digitClicked()
 {
     QPushButton * button = (QPushButton *)sender();
-
+    if(m_display->text() == "-0" && button->text().toDouble() == 0)
+            return;
     if(m_checkOperand)
     {
         m_display->setText("0");
@@ -154,9 +155,7 @@ void Calculator::plusClicked()
     }
     else
     {
-        m_leftOperand = m_display->text().toDouble();
-        m_operator = "+";
-        m_checkOperand = true;
+        saveSign("+");
     }
 }
 
@@ -178,9 +177,7 @@ void Calculator::minusClicked()
     }
     else
     {
-        m_leftOperand = m_display->text().toDouble();
-        m_operator = "-";
-        m_checkOperand = true;
+        saveSign("-");
     }
 }
 
@@ -206,9 +203,7 @@ void Calculator::divisionClicked()
     }
     else
     {
-        m_leftOperand = m_display->text().toDouble();
-        m_operator = "/";
-        m_checkOperand = true;
+        saveSign("/");
     }
 }
 
@@ -230,12 +225,16 @@ void Calculator::multiplyClicked()
     }
     else
     {
-        m_leftOperand = m_display->text().toDouble();
-        m_operator = "*";
-        m_checkOperand = true;
+        saveSign("*");
     }
 }
 
+void Calculator::saveSign(QString sign)
+{
+    m_leftOperand = m_display->text().toDouble();
+    m_operator = sign;
+    m_checkOperand = true;
+}
 void Calculator::hasResult(QString sign)
 {
     m_leftOperand = m_result;
@@ -347,7 +346,6 @@ void Calculator::percentClicked()
 
 void Calculator::changeSignClicked()
 {
-
     QString displayText = m_display->text();
     double result = displayText.toDouble();
 
@@ -358,6 +356,11 @@ void Calculator::changeSignClicked()
     else if(result < 0.0)
     {
         displayText.remove(0, 1);
+    }
+    else if(displayText != "-0")
+    {
+        displayText.prepend("-");
+        m_checkOperand = false;
     }
     m_display->setText(displayText);
 }

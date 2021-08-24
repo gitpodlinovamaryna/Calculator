@@ -50,6 +50,7 @@ private:
       Button *createButton(const QString &text, QString color);
       void calculate();
       void hasResult(QString);
+      void saveSign(QString);
 
  };
 
