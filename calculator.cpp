@@ -30,6 +30,7 @@ Calculator::Calculator(QWidget *parent)
     m_rightOperand = 0;
     m_result = 0;
     m_check_memory = false;
+    m_sign = false;
 
 
     Button *plusButton = createButton("+",btn_orange);
@@ -145,12 +146,7 @@ void Calculator::plusClicked()
             return;
         }
         m_rightOperand = m_display->text().toDouble();
-        m_result = m_leftOperand + m_rightOperand;
-        m_check_memory = true;
-        m_leftOperand = 0;
-        m_rightOperand = 0;
-        m_display->setText((QString::number(m_result, 'g', 15)));
-        m_operator = "";
+        calculate();
     }
     if(m_check_memory)
     {
@@ -178,12 +174,7 @@ void Calculator::minusClicked()
             return;
         }
         m_rightOperand = m_display->text().toDouble();
-        m_result = m_leftOperand - m_rightOperand;
-        m_check_memory = true;
-        m_leftOperand = 0;
-        m_rightOperand = 0;
-        m_display->setText((QString::number(m_result, 'g', 15)));
-        m_operator = "";
+        calculate();
     }
     if(m_check_memory)
     {
@@ -215,12 +206,7 @@ void Calculator::divisionClicked()
         {
             return;
         }
-        m_result = m_leftOperand / m_rightOperand;
-        m_check_memory = true;
-        m_leftOperand = 0;
-        m_rightOperand = 0;
-        m_display->setText((QString::number(m_result, 'g', 15)));
-        m_operator = "";
+        calculate();
     }
     if(m_check_memory)
     {
@@ -248,12 +234,7 @@ void Calculator::multiplyClicked()
            return;
         }
         m_rightOperand = m_display->text().toDouble();
-        m_result = m_leftOperand * m_rightOperand;
-        m_check_memory = true;
-        m_leftOperand = 0;
-        m_rightOperand = 0;
-        m_display->setText((QString::number(m_result, 'g', 15)));
-        m_operator = "";
+        calculate();
     }
     if(m_check_memory)
     {
@@ -271,6 +252,33 @@ void Calculator::multiplyClicked()
     }
 }
 
+void Calculator::calculate()
+{
+    if(m_operator == "+")
+    {
+        m_result = m_leftOperand + m_rightOperand;
+    }
+
+    if(m_operator == "-")
+    {
+        m_result = m_leftOperand - m_rightOperand;
+    }
+
+    if(m_operator == "*")
+    {
+        m_result = m_leftOperand * m_rightOperand;
+    }
+
+    if(m_operator == "/")
+    {
+        m_result = m_leftOperand / m_rightOperand;
+    }
+    m_check_memory = true;
+    m_leftOperand = 0;
+    m_rightOperand = 0;
+    m_display->setText((QString::number(m_result, 'g', 15)));
+    m_operator = "";
+}
 void Calculator::equalClicked()
 {
     if(m_leftOperand != 0.0 && m_operator != "")

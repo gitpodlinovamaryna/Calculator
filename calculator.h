@@ -22,6 +22,7 @@
       double  m_rightOperand;
       double  m_result;
       bool  m_check_memory;
+      bool m_sign;
 
  public:
      Calculator(QWidget *parent = 0);
@@ -44,8 +45,10 @@ private slots:
       void changeSignClicked();
       void digitClicked();
 
+
 private:
       Button *createButton(const QString &text, QString color);
+      void calculate();
 
  };
 
