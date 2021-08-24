@@ -49,6 +49,7 @@ private slots:
 private:
       Button *createButton(const QString &text, QString color);
       void calculate();
+      void hasResult(QString);
 
  };
 

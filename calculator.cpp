@@ -150,11 +150,7 @@ void Calculator::plusClicked()
     }
     if(m_check_memory)
     {
-        m_leftOperand = m_result;
-        m_result = 0;
-        m_check_memory = false;
-        m_checkOperand = true;
-        m_operator = "+";
+        hasResult("+");
     }
     else
     {
@@ -178,11 +174,7 @@ void Calculator::minusClicked()
     }
     if(m_check_memory)
     {
-        m_leftOperand = m_result;
-        m_result = 0;
-        m_check_memory = false;
-        m_checkOperand = true;
-        m_operator = "-";
+       hasResult("-");
     }
     else
     {
@@ -210,11 +202,7 @@ void Calculator::divisionClicked()
     }
     if(m_check_memory)
     {
-        m_leftOperand = m_result;
-        m_result = 0;
-        m_check_memory = false;
-        m_checkOperand = true;
-        m_operator = "/";
+        hasResult("/");
     }
     else
     {
@@ -238,11 +226,7 @@ void Calculator::multiplyClicked()
     }
     if(m_check_memory)
     {
-        m_leftOperand = m_result;
-        m_result = 0;
-        m_check_memory = false;
-        m_checkOperand = true;
-        m_operator = "*";
+        hasResult("*");
     }
     else
     {
@@ -250,6 +234,15 @@ void Calculator::multiplyClicked()
         m_operator = "*";
         m_checkOperand = true;
     }
+}
+
+void Calculator::hasResult(QString sign)
+{
+    m_leftOperand = m_result;
+    m_result = 0;
+    m_check_memory = false;
+    m_checkOperand = true;
+    m_operator = sign;
 }
 
 void Calculator::calculate()
