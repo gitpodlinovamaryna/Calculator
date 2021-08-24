@@ -30,7 +30,7 @@ Calculator::Calculator(QWidget *parent)
     m_rightOperand = 0;
     m_result = 0;
     m_check_memory = false;
-    m_sign = false;
+    m_error = false;
 
 
     Button *plusButton = createButton("+",btn_orange);
@@ -117,6 +117,11 @@ Button *Calculator::createButton(const QString &text, QString color)
 
 void Calculator::digitClicked()
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     QPushButton * button = (QPushButton *)sender();
     if(m_display->text() == "-0" && button->text().toDouble() == 0)
             return;
@@ -139,6 +144,11 @@ void Calculator::digitClicked()
 
 void Calculator::plusClicked()
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     if(m_leftOperand != 0)
     {
         if(m_checkOperand)
@@ -161,6 +171,11 @@ void Calculator::plusClicked()
 
 void Calculator::minusClicked()
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     if(m_leftOperand != 0)
     {
         if(m_checkOperand)
@@ -183,6 +198,11 @@ void Calculator::minusClicked()
 
 void Calculator::divisionClicked()
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     if(m_leftOperand != 0)
     {
         if(m_checkOperand)
@@ -190,11 +210,13 @@ void Calculator::divisionClicked()
             m_operator = "/";
             return;
         }
-        m_rightOperand = m_display->text().toDouble();
-        if(m_rightOperand == 0)
+
+        if(m_display->text().toDouble() == 0)
         {
+            displayError();
             return;
         }
+        m_rightOperand = m_display->text().toDouble();
         calculate();
     }
     if(m_check_memory)
@@ -209,6 +231,11 @@ void Calculator::divisionClicked()
 
 void Calculator::multiplyClicked()
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     if(m_leftOperand != 0)
     {
         if(m_checkOperand)
@@ -231,12 +258,23 @@ void Calculator::multiplyClicked()
 
 void Calculator::saveSign(QString sign)
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     m_leftOperand = m_display->text().toDouble();
     m_operator = sign;
     m_checkOperand = true;
 }
+
 void Calculator::hasResult(QString sign)
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     m_leftOperand = m_result;
     m_result = 0;
     m_check_memory = false;
@@ -246,6 +284,11 @@ void Calculator::hasResult(QString sign)
 
 void Calculator::calculate()
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     if(m_operator == "+")
     {
         m_result = m_leftOperand + m_rightOperand;
@@ -271,8 +314,14 @@ void Calculator::calculate()
     m_display->setText((QString::number(m_result, 'g', 15)));
     m_operator = "";
 }
+
 void Calculator::equalClicked()
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     if(m_leftOperand != 0.0 && m_operator != "")
     {
         if(m_checkOperand)
@@ -294,7 +343,7 @@ void Calculator::equalClicked()
         {
             if(m_rightOperand == 0.0)
             {
-                m_operator = "";
+                displayError();
                return;
             }
             m_result = m_leftOperand / m_rightOperand;
@@ -310,6 +359,11 @@ void Calculator::equalClicked()
 
 void Calculator::pointClicked()
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     if(m_checkOperand)
     {
         m_display->setText("0");
@@ -326,6 +380,11 @@ void Calculator::pointClicked()
 
 void Calculator::percentClicked()
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     if (m_display->text() == "0" && !m_check_memory)
         return;
     if(m_check_memory)
@@ -346,6 +405,11 @@ void Calculator::percentClicked()
 
 void Calculator::changeSignClicked()
 {
+    if(m_error)
+    {
+        clean();
+        return;
+    }
     QString displayText = m_display->text();
     double result = displayText.toDouble();
 
@@ -357,7 +421,7 @@ void Calculator::changeSignClicked()
     {
         displayText.remove(0, 1);
     }
-    else if(displayText != "-0")
+    else if(displayText != "-0" && m_result != 0)
     {
         displayText.prepend("-");
         m_checkOperand = false;
@@ -367,6 +431,11 @@ void Calculator::changeSignClicked()
 
 void Calculator::backspaceClicked()
 {
+   if(m_error)
+   {
+       clean();
+       return;
+   }
    QString display_text = m_display->text();
    display_text.chop(1);
    if(display_text.isEmpty())
@@ -374,6 +443,12 @@ void Calculator::backspaceClicked()
        display_text = "0";
    }
    m_display->setText(display_text);
+}
+
+void Calculator::displayError()
+{
+    m_display->setText("Divide by zero!");
+    m_error = true;
 }
 
 void Calculator::clean()
@@ -385,4 +460,5 @@ void Calculator::clean()
     m_result = 0;
     m_check_memory = false;
     m_checkOperand = true;
+    m_error = false;
 }

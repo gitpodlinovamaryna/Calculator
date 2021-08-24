@@ -22,7 +22,7 @@
       double  m_rightOperand;
       double  m_result;
       bool  m_check_memory;
-      bool m_sign;
+      bool m_error;
 
  public:
      Calculator(QWidget *parent = 0);
@@ -51,6 +51,7 @@ private:
       void calculate();
       void hasResult(QString);
       void saveSign(QString);
+      void displayError();
 
  };
 
