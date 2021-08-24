@@ -6,6 +6,7 @@
 #include "button.h"
 #include <QIcon>
 #include <qapplication.h>
+#include <QLabel>
 
  class Button;
 
@@ -14,10 +15,13 @@
      Q_OBJECT
 
  private:
-      QLineEdit *m_display;
-      QString m_displayText;
-      bool m_check_operand;
-
+      QLabel *m_display;
+      QString m_operator;
+      bool    m_checkOperand;
+      double  m_leftOperand;
+      double  m_rightOperand;
+      double  m_result;
+      bool  m_check_memory;
 
  public:
      Calculator(QWidget *parent = 0);
@@ -40,7 +44,7 @@ private slots:
       void changeSignClicked();
       void digitClicked();
       //void setText(QString);
-      void setText();
+     // void setText();
 
 private:
       Button *createButton(const QString &text, QString color);
